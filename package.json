@@ -2,17 +2,20 @@
   "name": "investing-app-api",
   "version": "1.0.0",
   "description": "Backend service for investor-app",
-  "main": "index.js",
+  "main": "src/app.js",
   "repository": "git@github.com:CalinFlorescu/investing-app-api.git",
   "author": "Calin Florescu <calin.florescu@fanduel.com>",
   "license": "MIT",
   "scripts": {
-    "start": "node app.js",
+    "start": "nodemon src/app.js",
     "test": "mocha"
   },
   "dependencies": {
     "dotenv": "^10.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mongodb": "^4.3.0",
+    "mongoose": "^6.1.5",
+    "winston": "^3.4.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
