@@ -2,7 +2,7 @@ const bodyParser = require('body-parser')
 const dotenv = require('dotenv')
 const express = require('express')
 const logger = require('./utils/logger')
-const mongoose = require('mongoose')
+const dbConnect = require('../config/db')
 
 const { 
     logErrorMiddleware, 
@@ -12,30 +12,18 @@ const {
  } = require('./middlewares/errorHandlers')
 
 const {
-    userRoutes
+    userRoutes,
+    authRoutes
 } = require('./routes')
 
 dotenv.config()
-
-const uri = 'mongodb+srv://agronum:OJ4KFJl9PJShSsC2@cluster1.wbe6o.mongodb.net/Investing-App?retryWrites=true&w=majority'
-
-// mongoose.connect(uri, 
-//     { 
-//         useNewUrlParser: true, 
-//         useUnifiedTopology: true 
-//     });
-
-// const mongoDbConnection = mongoose.connection
-
-// mongoDbConnection.on('error', console.error.bind(console, "connection error: "))
-// mongoDbConnection.on('open', () => {
-//     logger.info('Connected to MongoDB cluster')
-// })
+dbConnect()
 
 const server = express()
 
 server.use(bodyParser.json())
 server.use(userRoutes)
+server.use(authRoutes)
 
 server.use(logErrorMiddleware)
 server.use(returnErrorMiddleware)
@@ -54,7 +42,7 @@ process.on('unhandledRejection', error => {
     throw error
 })
 
-server.listen(8080, (err) => {
+server.listen(process.env.PORT, (err) => {
     if (err) client.close()
-    logger.info(`Server started on port ${8080}`)
+    logger.info(`Server started on port ${process.env.PORT}`)
 })
