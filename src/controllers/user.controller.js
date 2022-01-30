@@ -7,7 +7,12 @@ const listUsers = handleAsync(async (req, res) => {
     res.send(result)
 })
 
+const createUser = handleAsync(async (req, res) => {
+    const result = await userServices.createUser({...req.body})
+})
+
 module.exports = {
-    listUsers
+    listUsers,
+    createUser
 }
  
