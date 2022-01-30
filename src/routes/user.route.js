@@ -1,8 +1,5 @@
 const express = require('express')
 const { userController } = require('../controllers')
-const handleAsync = require('../utils/handleAsync')
-
-const { Api404Error } = require('../utils/errors')
 
 const router = express.Router()
 
